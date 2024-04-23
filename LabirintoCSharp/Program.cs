@@ -120,7 +120,7 @@ namespace LabirintoCSharp
                     }
                     else
                     {
-                        Console.WriteLine("Não é possivel chegar ao queijo");
+                        Console.WriteLine("Não é possivel chegar ao queijo!");
                     }
                 }                    
 
@@ -129,7 +129,7 @@ namespace LabirintoCSharp
                 mostrarLabirinto(meuLab, limit, limit);
             } while (meuLab[i, j] != 'Q');
 
-            Console.WriteLine($"Queijo encontrado na posicao: {i},{j}");
+            Console.WriteLine($"Queijo encontrado na posição: {i},{j}");
 
         }
 
