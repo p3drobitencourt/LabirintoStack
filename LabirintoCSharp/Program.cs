@@ -5,15 +5,26 @@ namespace LabirintoCSharp
 {
     public class Posicao
     {
-        private int i;
-        private int j;
+        private int _i;
+        private int _j;
 
         public Posicao(int i, int j)
         {
-            this.i = i;
-            this.j = j;
+            this._i = i;
+            this._j = j;
         }
 
+        public int i
+        {
+            get => _i;
+            set => _i = value;
+        }
+
+        public int j
+        {
+            get => _j;
+            set => _j = value;
+        }
 
     }
 
@@ -71,51 +82,55 @@ namespace LabirintoCSharp
             do
             {
                 meuLab[i, j] = 'M';
-                if (meuLab[i, j + 1] == '.')
+                if (meuLab[i, j + 1] == '.' || meuLab[i, j + 1] == 'Q')
                 {
                     j++;
                     Posicao novaPosicao = new Posicao(i,j);
                     minhaPilha.Push(novaPosicao);
-                    // empilhar posicao atual
-                    // minhaPilha.Push();// i e j
-                    
+
                 }
-                else if (meuLab[i + 1, j] == '.')
+                else if (meuLab[i + 1, j] == '.' || meuLab[i+1, j ] == 'Q')
                 {
                     i++;
                     Posicao novaPosicao = new Posicao(i, j);
                     minhaPilha.Push(novaPosicao);
                     
                 }
-                else if (meuLab[i,j-1] == '.')
+                else if (meuLab[i,j-1] == '.' || meuLab[i,j-1] == 'Q')
                 {
-                    j++;
+                    j--;
                     Posicao novaPosicao = new Posicao(i, j);
                     minhaPilha.Push(novaPosicao);
 
                 }
-                else if (meuLab[i-1, j] == '.')
+                else if (meuLab[i-1, j] == '.' || meuLab[i-1, j] == 'Q')
                 {
-                    i++;
+                    i--;
                     Posicao novaPosicao = new Posicao(i, j);
                     minhaPilha.Push(novaPosicao);
 
                 }
-                if()
-                //else if baixo i+1
-                // else if esquerda j-1
-                // else if cima i-1
-                // if nao tiver vazio minhaPilha.Count()>0
-                // i, j = pop
-                // se tiver vazio
-                // return false
-
+                else
+                {
+                    if (minhaPilha.Count > 0)
+                    {
+                        Posicao posicao = minhaPilha.Pop();
+                        i = posicao.i;
+                        j = posicao.j;
+                    }
+                    else
+                    {
+                        Console.WriteLine("Não é possivel chegar ao queijo");
+                    }
+                }                    
 
                 System.Threading.Thread.Sleep(200);
                 Console.Clear();
                 mostrarLabirinto(meuLab, limit, limit);
             } while (meuLab[i, j] != 'Q');
-            // encontrou
+
+            Console.WriteLine($"Queijo encontrado na posicao: {i},{j}");
+
         }
 
 
